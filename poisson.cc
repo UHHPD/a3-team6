@@ -1,3 +1,9 @@
+#include<iostrean>
+#include<fstream>
+#include<cmath>
+
+
+
 double poisson(double mu, int k) {
     return 0;
 }
