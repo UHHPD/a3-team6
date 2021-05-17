@@ -24,7 +24,7 @@ int main() {
      const double d = 3.11538;
      double a = pow(d,k);
      double b = exp (-d);
-     double c = tgamma(k);
+     double c = tgamma(k+1);
      double P = (a*b)/c;
     double Vert = P*234.0;
     std:: cout << k << ": " << zaehler[k] << ":" << Vert << std::endl;
