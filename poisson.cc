@@ -10,7 +10,7 @@ double poisson(double mu, int k) {
 }
 
 int main() {
-   std::ofstream fout("hispoi.txt");
+   std::ofstream fout("histpoi.txt");
     using namespace std;
     vector<int> zaehler(11);
 
