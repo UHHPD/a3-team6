@@ -45,9 +45,11 @@ int main() {
      double Quotient = b/a;
      int e = 233;
      double z = (-2*log(Quotient)-e)/sqrt(2*e);
-   
+    
+    
     foutp << Quotient << endl;
     foutg << z << endl;
+    cout << z << endl;
    }
     fin.close();
     foutp.close();
