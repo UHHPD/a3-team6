@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <fstream>
 #include <vector>
@@ -5,7 +6,7 @@
 
 using namespace std;
 
-double poisson(double mu, int k) {
+double poisson(double mu, int k){
     double a = pow(mu,k)*exp(-mu);
     double b =tgamma(k+1);
     return a/b;
@@ -19,25 +20,43 @@ double prob(std::vector<int> daten, double mu) {
   }
   return like;
 }
+
 int main() {
-
-
-  
-    ifstream fin("datensumme.txt");
+  ifstream fin("datensumme.txt");
     vector<int> daten;
     int n_i;
     for(int i = 0 ; i < 234 ; ++i) {
         fin >> n_i;
         daten.push_back(n_i);
     }
-    fin.close();
+    
+  fin.close();
 
-    cout <<prob(daten, 3.11538)<< std :: endl ;
+   cout <<prob(daten, 3.11538)<< endl ;
+  
+   ofstream foutg("Abweichung z");
+   ofstream foutp("Likelihood-Quotient.txt");
+    
+   for(unsigned int k=0; k <  234 ; ++k){
+  
+     const double d = 3.11538;
+     double a = pow(d,k)*exp (-d);
+     double b = exp (-n_i)*exp (-n_i);
+     double Quotient = b/a;
+     int e = 233;
+     double z = (-2*log(Quotient)-e)/sqrt(2*e);
+   
+    foutp << Quotient << endl;
+    foutg << z << endl;
+   }
+    fin.close();
+    foutp.close();
+    foutg.close();
 
     ofstream fouta("likelihood.txt");
     ofstream foutb("nll.txt");
     ofstream foutc("deltanll.txt");
-
+    
     for(int i = 0 ; i <= 60 ; ++i) {
       double min = i/10.0;
       double l=prob(daten, min);
@@ -51,7 +70,5 @@ int main() {
     fouta.close();
     foutb.close();
     foutc.close();
-
-
     
 }
