@@ -21,6 +21,16 @@ double prob(std::vector<int> daten, double mu) {
   return like;
 }
 
+double prob2(std::vector<int> daten){
+  double like=1;
+  for(int k : daten) {
+    double ver=poisson(k,k);
+    like*=ver;
+  }
+return like;
+}
+
+
 int main() {
   ifstream fin("datensumme.txt");
     vector<int> daten;
@@ -34,26 +44,23 @@ int main() {
 
    cout <<prob(daten, 3.11538)<< endl ;
   
-   ofstream foutg("Abweichung z");
+   
    ofstream foutp("Likelihood-Quotient.txt");
-    
-   for(unsigned int k=0; k <  234 ; ++k){
-  
-     const double d = 3.11538;
-     double a = pow(d,k)*exp (-d);
-     double b = exp (-n_i)*exp (-n_i);
-     double Quotient = b/a;
-     int e = 233;
-     double z = (-2*log(Quotient)-e)/sqrt(2*e);
+   double Lambda = prob(daten, 3.11538)/prob2(daten);
+   double LNLambda=-2*log(Lambda);
+
+   cout << LNLambda << endl;
+     
+    int e = 233;
+    double z = (-2*log(Lambda)-e)/sqrt(2*e);
     
     
-    foutp << Quotient << endl;
-    foutg << z << endl;
+    foutp << Lambda << endl;
     cout << z << endl;
-   }
+   
     fin.close();
     foutp.close();
-    foutg.close();
+    
 
     ofstream fouta("likelihood.txt");
     ofstream foutb("nll.txt");
